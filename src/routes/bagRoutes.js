@@ -4,10 +4,6 @@ const Bag = require('../models/bag');
 
 const router = express.Router();
 
-/**
- * POST /bag
- * Create a new bag
- */
 router.post('/', async (req, res) => {
   try {
     const bag = await Bag.create(req.body);
@@ -20,10 +16,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-/**
- * GET /bag
- * Get all bags
- */
 router.get('/', async (req, res) => {
   try {
     const bags = await Bag.find().sort({ createdAt: -1 });
@@ -36,15 +28,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-/**
- * GET /bag/:id
- * Get 1 bag by id
- */
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
-    // check if id is valid mongo objectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         error: 'Invalid id',
@@ -70,10 +57,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-/**
- * PUT /bag/:id
- * Update a bag by id
- */
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -86,8 +69,8 @@ router.put('/:id', async (req, res) => {
     }
 
     const updatedBag = await Bag.findByIdAndUpdate(id, req.body, {
-      new: true,         // return updated document
-      runValidators: true // enforce schema validation on update
+      new: true,          
+      runValidators: true
     });
 
     if (!updatedBag) {
@@ -106,10 +89,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-/**
- * DELETE /bag/:id
- * Delete a bag by id
- */
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;

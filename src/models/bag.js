@@ -23,10 +23,6 @@ const bagSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    packaging: {
-      type: String,
-      required: true,
-    },
     inspiration: {
       type: String,
       default: '',
