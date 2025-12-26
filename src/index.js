@@ -12,15 +12,11 @@ app.use(
     origin: [
       'http://localhost:5173',
       'http://127.0.0.1:5173',
-      'https://lays-vue.onrender.com', // ✅ jouw online Vue
     ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // ✅ OPTIONS erbij
-    allowedHeaders: ['Content-Type', 'Authorization'],    // ✅ nodig voor JSON
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: false,
   })
 );
-
-// ✅ preflight
-app.options('*', cors());
 
 app.use(express.json());
 
@@ -28,8 +24,8 @@ const port = process.env.PORT || 3000;
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ Connected to MongoDB Atlas'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err.message));
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch((err) => console.error('MongoDB connection error:', err.message));
 
 app.get('/', (req, res) => {
   res.json({ status: 'success', message: 'API running successfully' });
@@ -38,5 +34,5 @@ app.get('/', (req, res) => {
 app.use('/bag', bagRoutes);
 
 app.listen(port, () => {
-  console.log(`🚀 Server running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
