@@ -14,9 +14,10 @@ app.use(
       "http://localhost:5173",
       "http://127.0.0.1:5173",
       "https://lays-vue.onrender.com",
+      "https://lays-threejs.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
