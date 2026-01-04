@@ -38,6 +38,9 @@ app.get("/", (req, res) => {
 app.use("/bag", bagRoutes);
 app.use("/user", userRoutes);
 
+app.use("/api/v1/bag", bagRoutes);
+app.use("/api/v1/user", userRoutes);
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`🚀 Server running on port ${port}`);
