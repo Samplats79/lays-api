@@ -35,6 +35,11 @@ const bagSchema = new mongoose.Schema(
       type: String,
       default: 'anonymous',
     },
+
+    votes: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
