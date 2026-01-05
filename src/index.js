@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const bagRoutes = require("./routes/bagRoutes");
 const userRoutes = require("./routes/userRoutes");
+const createAdmin = require("./createAdmin");
 
 const app = express();
 
@@ -25,7 +26,11 @@ app.use(express.json({ limit: "8mb" }));
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB Atlas"))
+  .then(async () => {
+    console.log("Connected to MongoDB Atlas");
+    await createAdmin();
+    console.log("Admin ready: admin@admin.com / Admin");
+  })
   .catch((err) => console.error("MongoDB connection error:", err.message));
 
 app.get("/", (req, res) => {
@@ -43,5 +48,5 @@ app.use("/api/v1/user", userRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`🚀 Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
